@@ -14,7 +14,7 @@ export default function App() {
     (state) => state.quiz
   );
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(loadQuestions());
   }, [dispatch]);
@@ -54,8 +54,8 @@ export default function App() {
           ))}
         </div>
         {completed && (
-          <div className="alert alert-success text-center mt-4" role="alert">
-            Congratulations !!!
+          <div className="alert alert-success text-center mt-4" style={{ fontSize: "30px" }} role="alert">
+            Congratulations !!! 👏🥳🚀
           </div>
         )}
       </div>
