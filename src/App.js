@@ -23,7 +23,7 @@ export default function App() {
     dispatch(loadQuestions());
   }, [dispatch]);
 
-  if (completed && correctAnswersCount === 15) {
+  if (completed && correctAnswersCount === 20) {
     return (
       <div className="text-center mt-4">
         <h2 className="text-success">Quiz Completed!</h2>
