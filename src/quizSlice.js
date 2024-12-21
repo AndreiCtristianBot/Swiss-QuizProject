@@ -91,6 +91,36 @@ const mockQuestions = [
     options: ["Lake Zurich", "Lake Geneva", "Lake Constance", "Lake Lucerne"],
     correctAnswer: "Lake Geneva",
   },
+  {
+    id: 16,
+    question: "Which Swiss canton is officially trilingual, recognizing German, Italian, and Romansh as official languages?",
+    options: ["Valais", "Fribourg", "canton of Graubünden", "Ticino"],
+    correctAnswer: "canton of Graubünden",
+  }, 
+  {
+    id: 17,
+    question: "What is the name of the Swiss national anthem?",
+    options: ["The Swiss Psalm", "Ode to the Alps", "Land of Four Rivers", "The Alpine Song"],
+    correctAnswer: "The Swiss Psalm",
+  },
+  {
+    id: 18,
+    question: "Which Swiss city is home to the headquarters of the International Red Cross?",
+    options: ["Basel", "Bern", "Geneva", "Zürich"],
+    correctAnswer: "Geneva",
+  },
+  {
+    id: 19,
+    question: "Which mountain pass connects Switzerland to Italy and has been a key trade route since Roman times?",
+    options: ["Simplon Pass", "Gotthard Pass", "Grand St. Bernard Pass", "Furka Pass"],
+    correctAnswer: "Grand St. Bernard Pass",
+  },
+  {
+    id: 20,
+    question: "Which of these Swiss landmarks is a UNESCO World Heritage Site?",
+    options: ["The Matterhorn", "Lavaux Vineyard Terraces", "Lake Zurich", "Jungfraujoch"],
+    correctAnswer: "Lavaux Vineyard Terraces",
+  }
 ];
 
 export const loadQuestions = createAsyncThunk(

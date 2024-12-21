@@ -8,23 +8,22 @@ export default function QuestionCard({ question }) {
   const [errorAlertMessage, setErrorAlertMessage] = useState("");
   const [showCompletionAlert, setShowCompletionAlert] = useState(false);
   const [completionAlertMessage, setCompletionAlertMessage] = useState("");
-  const { questions, wrongAnswersCount, completed } =
-    useSelector((state) => state.quiz);
+  const { questions, wrongAnswersCount, completed } = useSelector((state) => state.quiz);
 
   const handleAnswer = (answer) => {
-    if (wrongAnswersCount > 5 || completed) {
+    if (wrongAnswersCount > 10 || completed) {
       return; 
     }
     dispatch(submitAnswer({ id: question.id, answer }));
   };
   React.useEffect(() => {
-    if (wrongAnswersCount > 5) {
+    if (wrongAnswersCount > 10) {
       setErrorAlertMessage(
-        "You have more than 5 incorrect answers! Please be calm and reload the page and try again. Remember, it's part of the learning process! 🔝"
+        "You have more than 10 incorrect answers! Please be calm and reload the page and try again. Remember, it's part of the learning process! 🔝"
       )
       setShowErrorAlert(true);
     };
-    const timeout = setTimeout(() => setShowErrorAlert(false), 5000); 
+    const timeout = setTimeout(() => setShowErrorAlert(false), 10000); 
     return () => clearTimeout(timeout);
   }, [wrongAnswersCount]);
 
@@ -40,7 +39,7 @@ export default function QuestionCard({ question }) {
         `Quiz completed! You have ${wrongAnswersCount} wrong answers / ${questions.length} and ${correctAnswersCount} correct answers / ${questions.length}`
       );
       setShowCompletionAlert(true);
-      const timeout = setTimeout(() => setShowCompletionAlert(false), 5000); 
+      const timeout = setTimeout(() => setShowCompletionAlert(false), 10000); 
       return () => clearTimeout(timeout);
     }
   }, [questions]);
