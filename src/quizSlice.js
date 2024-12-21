@@ -110,6 +110,7 @@ const quizSlice = createSlice({
     hasError: false,
     completed: false,
     wrongAnswersCount: 0,
+    correctAnswersCount: 0,
   },
   reducers: {
     submitAnswer: (state, action) => {
@@ -118,6 +119,8 @@ const quizSlice = createSlice({
         question.userAnswer = action.payload.answer;
         if (question.userAnswer !== question.correctAnswer) {
           state.wrongAnswersCount += 1; 
+        } else {
+          state.correctAnswersCount += 1;
         }
         state.completed = state.questions.every(
           (q) => q.userAnswer === q.correctAnswer

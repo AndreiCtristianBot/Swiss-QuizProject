@@ -6,18 +6,38 @@ import { loadQuestions } from "./quizSlice";
 export default function App() {
   const imageStyle = {
     width: "100%",
-    height: "300px", // Înălțime fixă
-    objectFit: "cover", // Taie imaginea pentru a păstra proporțiile
+    height: "300px", // Fixed height
+    objectFit: "cover",
   };
-  
-  const { questions, isLoading, hasError, completed } = useSelector(
-    (state) => state.quiz
-  );
+
+  const {
+    questions,
+    isLoading,
+    hasError,
+    completed,
+    correctAnswersCount,
+  } = useSelector((state) => state.quiz);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(loadQuestions());
   }, [dispatch]);
+
+  if (completed && correctAnswersCount === 15) {
+    return (
+      <div className="text-center mt-4">
+        <h2 className="text-success">Quiz Completed!</h2>
+        <p>Total Correct Answers: {correctAnswersCount} / {questions.length}</p>
+        <div
+          className="alert alert-success text-center mt-4"
+          style={{ fontSize: "30px" }}
+          role="alert"
+        >
+          Congratulations !!! 👏🥳🚀
+        </div>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -39,10 +59,10 @@ export default function App() {
 
   return (
     <div>
-      <img 
-          src="https://www.thetrainline.com/cms/media/1237/switzerland_mobile.jpg" 
-          alt="Switzerland" 
-          style={imageStyle} 
+      <img
+        src="https://www.thetrainline.com/cms/media/1237/switzerland_mobile.jpg"
+        alt="Switzerland"
+        style={imageStyle}
       />
       <div className="container py-4">
         <h1 className="text-center mb-4">Swiss Quiz</h1>
@@ -53,11 +73,6 @@ export default function App() {
             </div>
           ))}
         </div>
-        {completed && (
-          <div className="alert alert-success text-center mt-4" style={{ fontSize: "30px" }} role="alert">
-            Congratulations !!! 👏🥳🚀
-          </div>
-        )}
       </div>
     </div>
   );

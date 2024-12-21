@@ -2,34 +2,60 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { submitAnswer } from "./quizSlice";
 
-
-function QuestionCard({ question }) {
+export default function QuestionCard({ question }) {
   const dispatch = useDispatch();
-  const wrongAnswersCount = useSelector((state) => state.quiz.wrongAnswersCount);
-  const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [errorAlertMessage, setErrorAlertMessage] = useState("");
+  const [showCompletionAlert, setShowCompletionAlert] = useState(false);
+  const [completionAlertMessage, setCompletionAlertMessage] = useState("");
+  const { questions, wrongAnswersCount, completed } =
+    useSelector((state) => state.quiz);
 
   const handleAnswer = (answer) => {
-    if (wrongAnswersCount > 5) {
+    if (wrongAnswersCount > 5 || completed) {
       return; 
     }
     dispatch(submitAnswer({ id: question.id, answer }));
   };
   React.useEffect(() => {
     if (wrongAnswersCount > 5) {
-      setAlertMessage(
-        "You have more than 5 incorrect answers! Please be calm and reload the page and focus again. Don't forget that it's part of the learning proces🔝"
-      );
-      setShowAlert(true);
-      setTimeout(() => setShowAlert(false), 100000000000000000000); 
-    }
+      setErrorAlertMessage(
+        "You have more than 5 incorrect answers! Please be calm and reload the page and try again. Remember, it's part of the learning process! 🔝"
+      )
+      setShowErrorAlert(true);
+    };
+    const timeout = setTimeout(() => setShowErrorAlert(false), 5000); 
+    return () => clearTimeout(timeout);
   }, [wrongAnswersCount]);
+
+  React.useEffect(() => {
+    const allAnswered = questions.every((q) => q.userAnswer !== undefined); 
+    if (allAnswered) {
+      const correctAnswersCount = questions.filter(
+        (q) => q.userAnswer === q.correctAnswer
+      ).length;
+      const wrongAnswersCount = questions.length - correctAnswersCount;
+  
+      setCompletionAlertMessage(
+        `Quiz completed! You have ${wrongAnswersCount} wrong answers / ${questions.length} and ${correctAnswersCount} correct answers / ${questions.length}`
+      );
+      setShowCompletionAlert(true);
+      const timeout = setTimeout(() => setShowCompletionAlert(false), 5000); 
+      return () => clearTimeout(timeout);
+    }
+  }, [questions]);
+  
 
   return (
     <div className="card shadow">
-      {showAlert && (
-        <div className="alert alert-danger" role="alert">
-          {alertMessage}
+      {showErrorAlert && (
+        <div className="alert alert-danger text-center" role="alert">
+          {errorAlertMessage}
+        </div>
+      )}
+      {showCompletionAlert && (
+        <div className="alert alert-primary text-center" role="alert">
+          {completionAlertMessage}
         </div>
       )}
       <div className="card-body">
@@ -70,6 +96,4 @@ function QuestionCard({ question }) {
       </div>
     </div>
   );
-}
-
-export default QuestionCard;
+};
