@@ -24,7 +24,7 @@ Follow these steps to set up the project on your local machine:
 1. **Clone the repository**:
    Use the following command to clone the repository to your local machine:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/AndreiCtristianBot/Swiss-QuizProject.git
    cd swiss-quiz
 
 ## Usage
