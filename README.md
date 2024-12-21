@@ -28,3 +28,29 @@ Follow these steps to set up the project on your local machine:
    cd swiss-quiz
 
 ## Usage
+Start the Development Server
+To run the app locally, use the following command in your terminal:
+
+### Copy this code:
+npm start
+Access the Application
+Once the local server is running, open a web browser and navigate to:
+
+### Acces this url:
+http://localhost:3000
+
+### How to Use the Application:
+
+The quiz starts as soon as the app loads.
+Answer the questions about Switzerland by selecting the correct option.
+If your answer is correct:
+The text "Your answer is correct!" will appear in green.
+If your answer is incorrect:
+The text "Your answer is wrong, try again! It's part of the learning process!" will appear in red.
+If you give more than 5 wrong answers, an alert message will appear encouraging you to focus and reload the page.
+Completing the Quiz
+
+After answering all the questions:
+If all answers are correct, a congratulatory message will appear:
+"Congratulations !!! 👏🥳🚀"
+If not, you will see a summary showing the number of correct and incorrect answers.
