@@ -58,7 +58,7 @@ export default function QuestionCard({ question }) {
         </div>
       )}
       <div className="card-body">
-        <h5 className="card-title">{question.question}</h5>
+        <h2 className="card-title">{question.question}</h2>
         <div>
           {question.options.map((option) => (
             <button
