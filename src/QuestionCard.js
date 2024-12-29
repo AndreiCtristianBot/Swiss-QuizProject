@@ -23,7 +23,7 @@ export default function QuestionCard({ question }) {
       )
       setShowErrorAlert(true);
     };
-    const timeout = setTimeout(() => setShowErrorAlert(false), 10000); 
+    const timeout = setTimeout(() => setShowErrorAlert(false), 100000); 
     return () => clearTimeout(timeout);
   }, [wrongAnswersCount]);
 
@@ -39,7 +39,7 @@ export default function QuestionCard({ question }) {
         `Quiz completed! You have ${wrongAnswersCount} wrong answers / ${questions.length} and ${correctAnswersCount} correct answers / ${questions.length}`
       );
       setShowCompletionAlert(true);
-      const timeout = setTimeout(() => setShowCompletionAlert(false), 10000); 
+      const timeout = setTimeout(() => setShowCompletionAlert(false), 100000); 
       return () => clearTimeout(timeout);
     }
   }, [questions]);
@@ -48,13 +48,23 @@ export default function QuestionCard({ question }) {
   return (
     <div className="card shadow">
       {showErrorAlert && (
-        <div className="alert alert-danger text-center" role="alert">
-          {errorAlertMessage}
+        <div 
+          className="alert alert-danger text-center"
+          role="alert" 
+          aria-live="assertive" 
+          id="errorAlert"
+        >
+          Error: {errorAlertMessage}
         </div>
       )}
       {showCompletionAlert && (
-        <div className="alert alert-primary text-center" role="alert">
-          {completionAlertMessage}
+        <div 
+          className="alert alert-primary text-center" 
+          role="alert" 
+          aria-live="polite" 
+          id="completionAlert"
+        >
+          Message: {completionAlertMessage}
         </div>
       )}
       <div className="card-body">
